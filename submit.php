@@ -2,27 +2,47 @@
 //session Start
 session_start();
 require( 'php/connect.php');
+if ($_POST['formID'] = 'New') {
 
- $query = "INSERT INTO templates (
+
+    $query = "INSERT INTO templates (
                     template_id,
                     html,
                     description)
-                    VALUES( NULL,'".$_POST['content']."','".$_POST['description']."')";
-                    
-if (!mysql_query($query)){
-    die('Error: '. mysql_error());
+                    VALUES( NULL,'" . $_POST['content'] . "','" . $_POST['description'] . "')";
+
+    $query2 = "INSERT INTO users_templates (
+                    user_template_id,
+                    user_id,
+                    template_id)
+                    VALUES(NULL, '" . $_SESSION['user_id'] . "', (SELECT MAX( template_id) FROM templates))";
+
+    if (!mysql_query($query)) {
+        die('Error: ' . mysql_error());
+    }
+    echo "document saved";
+    if (!mysql_query($query2)) {
+        die('Error: ' . mysql_error());
+    }
+    mysql_close();
+}else{
+    
+    $query = "UPDATE templates
+                    SET 
+                    html = [". $_POST['content']."],
+                    description = [".$_POST['description']."]
+                    WHERE
+                    tmeplate_id = ".$_POST['formID'];
+    
+    if(!mysql_query($query)){
+        die('Error: '. mysql_error());
+    }
+    mysql_close();
 }
-echo "document saved";
-
-mysql_close();
-
 
 header("Content-Type: text/html");
 header("Cache-Control: no-store");
 header("Pragma: no-cache");
-
-
-
 ?>
 <!DOCTYPE html>
 
@@ -31,18 +51,18 @@ header("Pragma: no-cache");
 
     </head>
     <body>
-        
-        
+
+
         <pre>
-            <?php
-            print_r($_POST);
-            echo '<br/>';
-            print_r($_GET);
-            echo '<br/>';
-            print_r($_SESSION);
-            echo '<br/>';
-            print_r($_SESSION);
-            ?>
+<?php
+print_r($_POST);
+echo '<br/>';
+print_r($_GET);
+echo '<br/>';
+print_r($_SESSION);
+echo '<br/>';
+print_r($_SESSION);
+?>
         </pre>
 
     </body>

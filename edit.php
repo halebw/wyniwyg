@@ -115,13 +115,16 @@ header("Pragma: no-cache");
                                     </textarea>
                                     <input type="submit" value="Submit"/>
                                 </form>-->
-                <form method="get" action="submit.php">
+                <form method="post" action="submit.php" onsubmit="whenSaving()">
                     Description:<input name="description" type="text" />
                     <?php
                     $htmlText = "Test Input Area";
                     echo '<input name="content" id="textarea" type="text" value=' . $htmlText . '/>';
                     ?>
                     <input name="submit" type="submit"/>
+                    <?php 
+                        echo '<input name="formID" type="hidden" value="'.$_POST["formID"].'"/>'
+                    ?> 
 <!--                           <textarea name="content" style="width:100%"></textarea>-->
                 </form>
                 <!--                <form method="POST" action="submit.php">

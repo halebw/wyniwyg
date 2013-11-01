@@ -18,9 +18,9 @@ header("Pragma: no-cache");
         <script src="js/jquery-1.10.2.min.js"></script>
         <script src="js/jquery.tinymce.min.js"></script>
         <script type="text/javascript">
-            tinymce.init({
-                selector: "textarea"
-            });
+//            tinymce.init({
+//                selector: "textarea"
+//            });
         </script>
 
         <title>What You Need Is What You Get</title>
@@ -28,13 +28,15 @@ header("Pragma: no-cache");
     </head>
     <body>
 
-        
+
 
         <?php
         include 'php/login.php';
         include 'php/header.php';
-        
+
         print_r($_SESSION);
+        echo '</br>';
+        print_r($_POST);
         ?>
 
 
@@ -43,29 +45,38 @@ header("Pragma: no-cache");
 
             <div id="templateList" class="sidebar">
                 <form method="post" action="edit.php">
-                    <input type="submit" value="New" />
+                    <input type="submit" value="New" name="formID" />
                 </form>
                 <!--                <a href="edit.php" ><h2 class="button" onclick="editTemp('new')" >Create New</h2></a>-->
-                <ul>
+                <form method="post" action="index.php">
                     <?php
                     //load templates attached to user
-                    $query = "SELECT t.description FROM templates t, users_templates ut WHERE t.template_id = ut.template_id AND ut.user_id = '" . $_SESSION["user_id"] . "'";
+                    $query = "SELECT t.description, t.template_id FROM templates t, users_templates ut WHERE t.template_id = ut.template_id AND ut.user_id = '" . $_SESSION["user_id"] . "'";
                     $result = mysql_query($query);
                     //build side list items
                     while ($row = mysql_fetch_array($result)) {
                         //add links to this area for preview to populate
-                        echo '<li> ' . $row["description"] . '</li>';
+                        echo '<input type="submit" name="formID"  value="'.$row["template_id"].'"> ' . $row["description"] . '</input>';
                     }
                     ?>
-                </ul>       
+                </form>       
 
             </div>
             <div id="previewArea" class="content">
-<!--                <form method="post">
-                    <textarea></textarea>
-                    <button type="submit" value="SubmitTest "/>
-                </form>-->
-
+                <?php
+                if(isset($_POST['formID'])){
+                $query = "SELECT html FROM templates WHERE template_id = ".$_POST['formID'];
+                $result = mysql_query($query);
+                while ($row = mysql_fetch_array($result)){
+                    echo '<div id="preview" >'.$row["html"].'</div>';
+                
+                }
+                 print_r($result);
+                };
+                
+               
+                ?>
+            </form>
             </div>
         </section>
         <footer id="footer">
