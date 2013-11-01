@@ -28,21 +28,13 @@ header("Pragma: no-cache");
     </head>
     <body>
 
-        <header id="header">
-
-
-            <div id="title">
-                <a href="index.php"><h1>WYNIWYG</h1></a>
-            </div>
-            <div id="loginLinks">
-                <!--                <a href="#">Login</a>
-                                <a href="#">Sign Up</a>-->
-                <a href="login.php">Logout</a>
-            </div>
-        </header>
+        
 
         <?php
         include 'php/login.php';
+        include 'php/header.php';
+        
+        print_r($_SESSION);
         ?>
 
 
