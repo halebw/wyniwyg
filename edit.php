@@ -4,7 +4,6 @@ session_start();
 require( 'php/connect.php');
 
 
-
 header("Content-Type: text/html");
 header("Cache-Control: no-store");
 header("Pragma: no-cache");
@@ -28,27 +27,27 @@ header("Pragma: no-cache");
             function init() {
 
                 tinymce.init({
-                    selector: "input#textarea",
-    theme: "modern",
-    apply_source_formatting : true,
-    height: 400,
-    plugins: [
-         "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
-         "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-         "save table contextmenu directionality emoticons template paste textcolor"
-   ],
-   content_css: "css/content.css",
-   toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | l      ink image | print preview media fullpage | forecolor backcolor emoticons", 
-   style_formats: [
-        {title: 'Bold text', inline: 'b'},
-        {title: 'Red text', inline: 'span', styles: {color: '#ff0000'}},
-        {title: 'Red header', block: 'h1', styles: {color: '#ff0000'}},
-        {title: 'Example 1', inline: 'span', classes: 'example1'},
-        {title: 'Example 2', inline: 'span', classes: 'example2'},
-        {title: 'Table styles'},
-        {title: 'Table row 1', selector: 'tr', classes: 'tablerow1'}
-    ]
- }); 
+                    selector: "textarea",
+                    theme: "modern",
+                    apply_source_formatting: true,
+                    height: 400,
+                    plugins: [
+                        "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+                        "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+                        "save table contextmenu directionality emoticons template paste textcolor"
+                    ],
+                    content_css: "css/content.css",
+                    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | l      ink image | print preview media fullpage | forecolor backcolor emoticons",
+                    style_formats: [
+                        {title: 'Bold text', inline: 'b'},
+                        {title: 'Red text', inline: 'span', styles: {color: '#ff0000'}},
+                        {title: 'Red header', block: 'h1', styles: {color: '#ff0000'}},
+                        {title: 'Example 1', inline: 'span', classes: 'example1'},
+                        {title: 'Example 2', inline: 'span', classes: 'example2'},
+                        {title: 'Table styles'},
+                        {title: 'Table row 1', selector: 'tr', classes: 'tablerow1'}
+                    ]
+                });
 //                    selector: "#textarea"
 //                });
 
@@ -57,14 +56,15 @@ header("Pragma: no-cache");
 //                var button = document.getElementById('insWord');
 
 //                button.addEventListener("click", function() {
-                
-                
+
+
 
             }
             function addText(textToAdd) {
-                    var editor = tinymce.get('edoc');
-                    tinyMCE.activeEditor.execCommand('mceInsertContent', false, textToAdd);
-                };
+                var editor = tinymce.get('edoc');
+                tinyMCE.activeEditor.execCommand('mceInsertContent', false, textToAdd);
+            }
+            ;
 
             window.onload = init;
         </script>
@@ -74,7 +74,7 @@ header("Pragma: no-cache");
     </head>
     <body>
 
-        
+
 
         <?php
         //Section for login information
@@ -101,7 +101,7 @@ header("Pragma: no-cache");
                         //add links to this area for preview to populate
 
                         echo '<button 
-                            onclick="addText(' . $row["input_text"] . ')">'. $row["name"] . '</button><br/>';
+                            onclick="addText(' . $row["input_text"] . ')">' . $row["name"] . '</button><br/>';
                     }
                     //onclick="addText(' . $row["input_text"] . ')"
                     ?>
@@ -109,21 +109,39 @@ header("Pragma: no-cache");
 
             </div>
             <div id="previewArea" class="content">
+                <?php
+//                include ('php/console.php');
+//                ?>
                 <!--                <form method="POST" action="submit.php">
                                     <textarea id="edoc" style="min-height: 500px; ">
                 
                                     </textarea>
                                     <input type="submit" value="Submit"/>
                                 </form>-->
-                <form method="post" action="submit.php" onsubmit="whenSaving()">
-                    Description:<input name="description" type="text" />
+                <form method="post" action="submit.php" >
                     <?php
-                    $htmlText = "Test Input Area";
-                    echo '<input name="content" id="textarea" type="text" value=' . $htmlText . '/>';
+                    if ($_POST['submit'] == 'Edit') {
+                        //if submit is from existing template, this will fill the fields with the existing data
+                        $query = "SELECT html, description FROM templates WHERE template_id = " . $_POST['formID'];
+                        $result = mysql_query($query);
+                        while ($row = mysql_fetch_array($result)) {
+                            $descript = $row['description'];
+                            $htmlText = $row['html'];
+                            echo '<input name="formID" type="hidden" value="' . $_POST["formID"] . '"/>';
+                        }
+                    } else {
+                        $descript = "";
+                        $htmlText = "";
+                        echo '<input name="formID" type="hidden" value="New" />';
+                    }
+
+                    echo ' Description:<input name="description" type="text" value="' . $descript . '"/>';
+
+                    //echo '<input name="content" id="textarea" type="textarea" value=' . $htmlText . '/>';
+                    echo '<textarea id="textarea" name="content" >' . $htmlText . '</textarea>';
                     ?>
                     <input name="submit" type="submit"/>
-                    <?php 
-                        echo '<input name="formID" type="hidden" value="'.$_POST["formID"].'"/>'
+                    <?php
                     ?> 
 <!--                           <textarea name="content" style="width:100%"></textarea>-->
                 </form>

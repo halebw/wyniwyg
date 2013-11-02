@@ -56,11 +56,19 @@ a{
     right: 0;
     float: left;
     min-width: 70%;
-    
+    padding-top: 10px;
     background-color: @previewBackgroundColor;
     height: @sectionHeight;
 }
+#preview{
+    
+    border: solid 1px;
+    width: @letterWidth;
+    height: @letterHeight;
+    -webkit-box-shadow:  5px 5px 0px 0px rgba(0, 0, 0, 1);
+     box-shadow:  5px 5px 0px 0px rgba(0, 0, 0, 1);
 
+}
 #log-in-form{
     position: fixed;
     z-index: 100;
@@ -73,7 +81,7 @@ a{
     padding: 20px;
 }
 
-.button{
+button{
     color: @darkTextColor;
     cursor: pointer;
     border: solid 2px;
@@ -81,5 +89,19 @@ a{
     .rounded;
     font-family: arial, sans-serif;
     background-color: @buttonBackgroundColor;
+    margin: 5px 10px;
+    left: 10px;
+    font-size: 1.1em;
     
+    height: 30px;
+width: 90%;
+    
+}
+#newBtn{
+    background-color: @headerBackgroundColor;
+    color: @darkTextColor;
+    position: absolute;
+    bottom: 40px;
+    left:0;
+   
 }

@@ -2,7 +2,11 @@
 //session Start
 session_start();
 require( 'php/connect.php');
-if ($_POST['formID'] = 'New') {
+print_r($_POST);
+echo '<br/>';
+print_r($_SESSION);
+
+if ($_POST['formID'] == 'New') {
 
 
     $query = "INSERT INTO templates (
@@ -16,6 +20,7 @@ if ($_POST['formID'] = 'New') {
                     user_id,
                     template_id)
                     VALUES(NULL, '" . $_SESSION['user_id'] . "', (SELECT MAX( template_id) FROM templates))";
+    
 
     if (!mysql_query($query)) {
         die('Error: ' . mysql_error());
@@ -29,10 +34,10 @@ if ($_POST['formID'] = 'New') {
     
     $query = "UPDATE templates
                     SET 
-                    html = [". $_POST['content']."],
-                    description = [".$_POST['description']."]
+                    html = '". $_POST['content']."',
+                    description = '".$_POST['description']."'
                     WHERE
-                    tmeplate_id = ".$_POST['formID'];
+                    template_id = ".$_POST['formID'];
     
     if(!mysql_query($query)){
         die('Error: '. mysql_error());
@@ -43,6 +48,8 @@ if ($_POST['formID'] = 'New') {
 header("Content-Type: text/html");
 header("Cache-Control: no-store");
 header("Pragma: no-cache");
+
+header("Location: index.php");
 ?>
 <!DOCTYPE html>
 
@@ -55,13 +62,7 @@ header("Pragma: no-cache");
 
         <pre>
 <?php
-print_r($_POST);
-echo '<br/>';
-print_r($_GET);
-echo '<br/>';
-print_r($_SESSION);
-echo '<br/>';
-print_r($_SESSION);
+
 ?>
         </pre>
 
