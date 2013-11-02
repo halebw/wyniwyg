@@ -6,7 +6,7 @@ if(!isset($_SESSION["user_id"])){
 		//------------We have username AND password--------------------------------
 		//store the user input in variables
 		$myusername=$_REQUEST['username']; 
-		$mypassword=$_REQUEST['password']; 
+		$mypassword=sha1($_REQUEST['password']); 
 		
 		// To protect MySQL injection 
 		$myusername = trim($myusername);
@@ -14,9 +14,9 @@ if(!isset($_SESSION["user_id"])){
 		$myusername = mysql_real_escape_string($myusername);
 		
 		
-		$mypassword = trim($mypassword);
-		$mypassword = stripslashes($mypassword);
-		$mypassword = mysql_real_escape_string($mypassword);
+//		$mypassword = trim($mypassword);
+//		$mypassword = stripslashes($mypassword);
+//		$mypassword = mysql_real_escape_string($mypassword);
 		
 		
 		$query = "SELECT user_id FROM users WHERE user_name = '".$myusername."' AND password = '".$mypassword."'";
@@ -53,6 +53,7 @@ if(!isset($_SESSION["user_id"])){
 			<div align="center">
 				<p><input type="submit" value="Login" /></p>
 			</div>
+                                                                        <a href="php/createAccount.php" >Create Account</a>
 		</form>
 	</div>';
 	}
