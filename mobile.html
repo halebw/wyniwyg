@@ -15,7 +15,8 @@ and open the template in the editor.
         <script src="js/jquery-1.10.2.min.js"></script>
         <script src="js/jquery.mobile-1.3.2.min.js"></script>
         <link rel="stylesheet" href="css/jquery.mobile.theme-1.3.2.min.css" />
-
+        
+        <script src="js/sha.js"></script>
         <!--Blackberry 10 Styles
         <script src="js/BlackBerry-JQM-Init-1.0.0.min.js"></script>
         <script src="js/BlackBerry-JQM-all-1.0.0.min.js"></script>
@@ -36,12 +37,12 @@ and open the template in the editor.
             <div data-role="footer">
                 <h1>Home</h1>
                 <div data-role="back"></div>
-                <a href="#login"  data-transition="flip" data-icon="arrow-r" data-iconpos="right" class="ui-btn-right">Account</a>
-                
+                <a href="#account"  data-transition="flip" data-icon="arrow-r" data-iconpos="right" class="ui-btn-right">Account</a>
+
             </div>
-            
+
             <div data-role="datagroup">
-                <script ></script>
+                <script >alert(globalUser);</script>
             </div>
             <p>TODO write content</p>
 
@@ -55,11 +56,23 @@ and open the template in the editor.
             </div>
         </div>
         <!-------------------------------- Account Page ------------------------------------------------>
-        <div id="login" data-role="page" >
+        <div id="account" data-role="page" >
             <div data-role="header">
                 <h1>Account</h1>
                 <a href="#home" data-transition="flip" data-icon="home" data-iconpos=notext>Home</a>
+                <a href="#login" data-transition="flip" data-icon="star" data-iconpos="left">Login</a>
+            </div>
+        </div>
 
+        <div id="login" data-role="page">
+            <div id="log-in-form" class="rounded">
+                <div data-role="header" ><h1>Log-In</h1>
+                    <a href="#account" data-role="back">Back</a></div>
+                
+                    Username: <input id="usernameField" type="text" name="user_name" size="15" /><br />
+                    Password: <input id="passwordField" type="password" name="password" size="15" /><br />
+                    <input id="loginBtn" type="submit" value="Submit" name="Submit" onClick="loginScript()"/>
+                
             </div>
         </div>
 

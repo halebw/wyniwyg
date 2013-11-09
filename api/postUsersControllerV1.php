@@ -12,7 +12,7 @@ class postUsersControllerV1 extends wlRestController {
         $pass = $this->actionParams['password'];
         
         $myusername = $this->actionParams['user_name'];
-        $mypassword = sha1($pass);
+        $mypassword = $pass;
 
 //        // To protect MySQL injection 
 //        $myusername = trim($myusername);
