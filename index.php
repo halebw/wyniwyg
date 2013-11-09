@@ -1,6 +1,11 @@
 <?php
 //session Start
 session_start();
+if(isset($_POST['mobile']) && ($_POST['mobile'] == 'mobile')){
+    
+    header ("Location: mindex.php");
+    
+}
 require( 'php/connect.php');
 
 

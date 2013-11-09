@@ -29,7 +29,8 @@ if(!isset($_SESSION["user_id"])){
 			$row = mysql_fetch_array($result);   //put the result into a PHP array
 			$_SESSION["user_id"] = $row["user_id"];   //here is the user_id
 			session_write_close();               //this closes the session so other files can use it
-			header("index.php");  //reload this script, and we will test for user_id again...
+			header("Location: ".$_SERVER["HTTP_REFERER"]);
+                                                                    //header("index.php");  //reload this script, and we will test for user_id again...
 		}else{    //there were no records found, login fail
 		
 			session_unset();     // unset $_SESSION variable
@@ -52,6 +53,7 @@ if(!isset($_SESSION["user_id"])){
 			Password: <input type="password" name="password" size="15" /><br />
 			<div align="center">
 				<p><input type="submit" value="Login" /></p>
+                                                                                                <input type="hidden" name="mobile" value="mobile">
 			</div>
                                                                         <a href="php/createAccount.php" >Create Account</a>
 		</form>
