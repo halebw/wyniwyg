@@ -38,41 +38,43 @@ and open the template in the editor.
         <div id="login" data-role="page">
             <div id="log-in-form" class="rounded">
                 <div data-role="header" ><h1>Log-In</h1>
-                    </div>
-
-                Username: <input id="usernameField" type="text" name="user_name" size="15" /><br />
-                Password: <input id="passwordField" type="password" name="password" size="15" /><br />
-                <input id="loginBtn" type="submit" value="Submit" name="Submit" />
+                </div>
+                    
+                    Username: <input id="usernameField" type="text" name="user_name" size="15" /><br />
+                    Password: <input id="passwordField" type="password" name="password" size="15" /><br />
+                    <input id="loginBtn" type="submit" value="Submit" name="Submit" />
+               
 
             </div>
         </div>
-        
+
         <!-------------------------------- Home/Selection Page ------------------------------------------>
         <div id="home" data-role="page" >
             <div data-role="footer">
                 <h1>Home</h1>
-                
+
                 <a href="#account"  data-transition="flip" data-icon="arrow-r" data-iconpos="right" class="ui-btn-right">Account</a>
 
             </div>
             <div >
-            <ul id="mobileTemplateList" data-role="listview" data-filter="true"  >
-                
-            </ul>
+                <ul id="mobileTemplateList" data-role="listview" data-filter="true"  >
+                    <li><a href="#home" >Tester</a></li>
+                </ul>
             </div>
 
-          
+
 
         </div>
         <!-------------------------------- Form Completion Page ------------------------------------->
         <div id="forms" data-role="page" >
             <div data-role="header">
                 <h1>Template Name</h1>
-                <a href="#home" data-transition="flip" data-icon="home" data-iconpos=notext>Home</a>
-
+                <a href="#" data-transition="flip" data-icon="home" data-iconpos=notext>Home</a>
+                
             </div>
+            <div id="formFields"></div>
         </div>
-        
+        <!-------------------------------Preview Page --------------------------------->
         <div id="preview" data-role="page">
             <div data-role="header">
                 <h1>Preview</h1>
@@ -88,7 +90,7 @@ and open the template in the editor.
             </div>
         </div>
         --------->
-        
+
 
 
 
