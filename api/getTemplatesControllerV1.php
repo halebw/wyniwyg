@@ -13,7 +13,9 @@ class getTemplatesControllerV1 extends wlRestController {
         $params = $this->getService()->getRequest()->getActionParams();
         
         if(is_numeric($params[0])){
-        $query = "SELECT t.template_id, t.description, t.html FROM templates t, users_templates ut WHERE t.template_id = ut.template_id AND ut.user_id = '" . $params[0] . "'";
+        $query = "SELECT t.template_id, t.description, "
+                . "t.html FROM templates t, users_templates ut WHERE t.template_id = ut.template_id AND "
+                . "ut.user_id = '" . $params[0] . "'";
         $result = mysql_query($query);
         $rows = [];
         $i = 0;

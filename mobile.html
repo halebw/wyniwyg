@@ -52,11 +52,11 @@ and open the template in the editor.
         <div id="home" data-role="page" >
             <div data-role="footer">
                 <h1>Home</h1>
-                <a href="#account"  data-transition="flip" data-icon="arrow-r" data-iconpos="right" class="ui-btn-right">Account</a>
+                <a href="#account"  data-transition="slide" data-icon="arrow-r" data-iconpos="right" class="ui-btn-right">Account</a>
             </div>
             <div>
-                <ul id="mobileTemplateList" data-role="listview" data-filter="true"  >
-                    <li><a href="#home" >Tester</a></li>
+                <ul id="mobileTemplateList" data-role="listview" data-transition="slide" data-filter="true"  >
+                    
                 </ul>
             </div>
         </div>
@@ -64,8 +64,9 @@ and open the template in the editor.
         <!-- Form Completion Page -->
         <div id="forms" data-role="page" >
             <div data-role="header">
-                <h1>Template Name</h1>
-                <a href="#" data-transition="flip" data-icon="home" data-iconpos= "notext">Home</a>        
+                <h1>Create Document</h1>
+                <a href="#home" data-transition="slide" data-direction="reverse" data-icon="arrow-l" data-iconpos= "notext">Back</a>     
+                <a href="#preview" onClick = "previewTemplate()" data-transition="slide" >Preview</a>
             </div>
             <div id="formFields">
 
@@ -75,18 +76,19 @@ and open the template in the editor.
         <div id="preview" data-role="page">
             <div data-role="header">
                 <h1>Preview</h1>
-                <a href="#forms" data-transition="flip" data-icon="arrow-l" data-iconpos="notext">Back</a>
+                <a href="#forms" data-transition="slide" data-direction="reverse" data-icon="arrow-l" data-iconpos="notext">Back</a>
             </div>
+            <div id="previewArea"></div>
         </div>
-        <!-- Account Page 
+        
         <div id="account" data-role="page" >
             <div data-role="header">
                 <h1>Account</h1>
-                <a href="#home" data-transition="flip" data-icon="home" data-iconpos=notext>Home</a>
-                <a href="#login" data-transition="flip" data-icon="star" data-iconpos="left">Login</a>
+                <a href="#home" data-transition="slide" data-direction="reverse" data-icon="home" data-iconpos=notext>Home</a>
+                <a href="#login" data-transition="slide" data-icon="star" data-iconpos="left">Login</a>
             </div>
         </div>
-        -->
+        
 
 
 
